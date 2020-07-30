@@ -18,10 +18,11 @@ module.exports = function (req, res) {
   res.setHeader('x-yakbak-tape', path.basename(__filename, '.js'))
 
 <% body.forEach(function (data) { -%>
-  const response = `<%- data %>`
+  const response = <%- data %>
+  const str = JSON.stringify(response)
 
-  res.setHeader('content-length', Buffer.byteLength(response, 'utf8'))
-  res.write(response)
+  res.setHeader('content-length', Buffer.byteLength(str, 'utf8'))
+  res.write(str)
 <% }) -%>
   res.end()
 
